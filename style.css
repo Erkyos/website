@@ -42,3 +42,28 @@ h2 {
 
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
+
+button {
+  background-color: rgb(31, 31, 31);
+  border: white;
+  border-style: solid;
+  border-width: 2px;
+  color: white;
+  padding: 15px 32px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: rgb(49, 49, 49);
+  
+}
+
+button:active {
+  background-color: rgb(94, 94, 94);
+}
