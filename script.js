@@ -7,7 +7,6 @@ class Mass {
         this.radius = radius;
         this.speed = speed;
         this.mass = mass;
-        this.pos_list = [];
 
     }
     update(dt) {
@@ -33,10 +32,11 @@ class Mass {
         if (this.y >= canvas.height || this.y <= 0)  {
             this.speed[1]*= -1
         } 
-        this.pos_list.push([this.x,this.y])
-        console.log((this.speed[0]**2 + this.speed[1])**(1/2))
         // ---------------
-        console.log(this.x,this.y)
+    }
+
+    interaction(other){
+        const dist = ((this.x - other.x)**2 + (this.y - other.y)**2)**(1/2)
     }
 
     draw(ctx) {
@@ -44,6 +44,8 @@ class Mass {
         
     }
 }
+
+
 
 function draw_circle(ctx,x,y,radius,color) {
     ctx.fillStyle = color;
@@ -58,13 +60,18 @@ function draw_circle(ctx,x,y,radius,color) {
         ctx.fill();
 
 }
+
+
 function update() {
     const now = performance.now();
     const dt = (now - time)/1000;
 
     time = now;
 
-    test_circle.update(dt);
+
+    for (mass of masses){
+        mass.update(dt)
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -72,14 +79,20 @@ function update() {
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
     
-    test_circle.draw(ctx);
+    for (mass of masses){
+        mass.draw(ctx)
+    }
     requestAnimationFrame(update);
 
 
 
 }
 
+function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
+}
 //const bouton = document.getElementById("test_but");
 //bouton.addEventListener("click", test);
 const canvas = document.getElementById("simu");
@@ -88,12 +101,19 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const test_circle = new Mass(200,200,10,[150,150],10)
+const test_circle2 = new Mass(500,500,10,[100,-180],10)
+
+const masses = [test_circle,test_circle2]
+window.addEventListener('resize', resize);
 update();
+
+
 
 
 
 function test() {
     alert("Test Sucessfull !");
 }
+
 
 
