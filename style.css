@@ -15,12 +15,8 @@ body {
 
     font-family: Arial, sans-serif;
 }
-.constructimg{
-    width: 300px;
-    height: auto;
-    margin-bottom: 20px;
-}
 h1 {
+  padding-top: 300px;
     color: white;
     font-size: 40px;
     text-align: center;
