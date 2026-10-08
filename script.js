@@ -49,7 +49,7 @@ class Mass {
     }
 
     draw(ctx) {
-        draw_circle(ctx, this.x,this.y,this.radius,"#ffffff")
+        draw_circle(ctx, this.x,this.y,this.radius,"#ffffff",3)
         
     }
 }
@@ -71,7 +71,7 @@ class BlackHole {
 
 
 
-function draw_circle(ctx,x,y,radius,color) {
+function draw_circle(ctx,x,y,radius,color, width) {
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.arc(
@@ -81,7 +81,13 @@ function draw_circle(ctx,x,y,radius,color) {
         0,
         2*Math.PI
         );
+    if (width != 0){
+        ctx.strokeStyle = color
+        ctx.lineWidth = width
+        ctx.stroke();
+    } else {
         ctx.fill();
+    }
 
 }
 
@@ -102,10 +108,8 @@ function update() {
 
     ctx.fillStyle = "#1e1e21";
     ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    ctx.drawImage(blackholeImg, canvas.width/2 - canvas.width/12, canvas.height/2 - canvas.width/12, canvas.width/6,canvas.width/6)
-
-
+    draw_circle(ctx,canvas.width/2,canvas.height/2,25,"#000000",3)
+    draw_circle(ctx,canvas.width/2,canvas.height/2,18,"#000000",0)
     for (mass of masses){
         for (mass2 of masses){
             if (mass2 != mass){
